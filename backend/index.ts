@@ -1,4 +1,5 @@
-const { Client } = require("@googlemaps/google-maps-services-js")
+import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js"
+import { transformOpeningHours } from "./dataTransformers"
 const apiKey = Bun.env.GOOGLE_API_KEY
 
 
@@ -9,8 +10,8 @@ const getPlaceId = async(query: string) => {
         const response = await client.findPlaceFromText({
             params: {
                 input: query,
-                inputtype: "textquery",
-                key: apiKey,
+                inputtype: PlaceInputType.textQuery,
+                key: apiKey ?? "",
             },
         })
 
@@ -39,7 +40,7 @@ const getOpeningHours = async (placeId: string, fromMemory: boolean = false) => 
             params: {
                 place_id: placeId,
                 fields: ["opening_hours"],
-                key: apiKey,
+                key: apiKey ?? "",
             },
         })
 
@@ -58,9 +59,17 @@ const getOpeningHours = async (placeId: string, fromMemory: boolean = false) => 
 (async () => {
     const placeName = ""
     const placeId = await getPlaceId(placeName)
+
+    if (!apiKey) {
+        console.error("No API key provided")
+        return
+    }
+
     if (placeId) {
         const openingHours = await getOpeningHours(placeId)
-        console.log("Place opening hours", openingHours)
+        console.log(
+            transformOpeningHours(openingHours)
+        )
     } else {
         console.log("Place not found")
     }
