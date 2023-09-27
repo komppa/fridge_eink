@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "author": "K",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -12, "left": -14, "attrs": {} },
+    {
+      "type": "board-epaper-2in9",
+      "id": "epd1",
+      "top": 21.7,
+      "left": -262.82,
+      "rotate": 270,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "epd1:CS", "esp:D5", "gold", [ "h-0.14", "v88.35", "h198.4", "v-256.63" ] ],
+    [ "epd1:DC", "esp:TX2", "green", [ "v63.76", "h21.93", "v14.13", "h163.38", "v-236.47" ] ],
+    [ "epd1:RST", "esp:RX2", "gray", [ "v69.49", "h9.63", "v29.08", "h226.68", "v-247.35" ] ],
+    [ "esp:D4", "epd1:BUSY", "green", [ "v0.02", "h21.65", "v194.26", "h-236.97" ] ],
+    [ "epd1:VCC", "esp:VIN", "red", [ "v31.71", "h89.41", "v-132.79" ] ],
+    [ "epd1:GND", "esp:GND.2", "black", [ "h0.33", "v20.41", "h89.22", "v-130.99" ] ],
+    [ "epd1:DIN", "esp:D23", "green", [ "v40.68", "h49.43", "v0.42", "h86.88", "v-276.68" ] ],
+    [ "epd1:CLK", "esp:D18", "green", [ "v49.15", "h16.22", "v17.38", "h138.28", "v-244.41" ] ]
+  ],
+  "dependencies": {}
+}
