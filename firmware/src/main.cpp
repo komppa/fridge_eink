@@ -5,6 +5,7 @@
 #include <SPI.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include <ArduinoJson.h>
 
 
 #define WIFI_SSID       "Wokwi-GUEST"
@@ -43,14 +44,22 @@ void setup() {
     https.begin(endpoint);
     
     int httpCode = https.GET();
-    Serial.println("HTTP code: " + String(httpCode));
-    String payload = https.getString();
-    Serial.println("Payload: " + payload);
+    // Serial.println("HTTP code: " + String(httpCode));
 
+    String payload = https.getString();
+    DynamicJsonDocument doc(1024);
+    deserializeJson(doc, payload);
+
+    String quote = doc["quote"].as<String>();
 
     SPI.begin(EPD_SCLK, EPD_MISO, EPD_MOSI);
     display.init();
     display.setRotation(2);
+
+    display.setTextColor(GxEPD_BLACK);
+    display.setCursor(0, 20);
+    display.println(quote);
+    display.update();
 
 }
 
