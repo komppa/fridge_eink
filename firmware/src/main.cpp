@@ -1,11 +1,12 @@
 #include <GxEPD.h>
-#include <GxGDEM029T94/GxGDEM029T94.h>   
+#include <GxGDEM029T94/GxGDEM029T94.h>
 #include <GxIO/GxIO_SPI/GxIO_SPI.h>
-#include <GxIO/GxIO.h>  
+#include <GxIO/GxIO.h>
 #include <SPI.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include <Fonts/FreeMonoBold9pt7b.h>
 
 
 #define WIFI_SSID       "Wokwi-GUEST"
@@ -13,7 +14,7 @@
 
 #define EPD_CS          5
 #define EPD_DC          17
-#define EPD_RST         16
+#define EPD_RST         16 
 #define EPD_BUSY        4
 #define EPD_SCLK        18
 #define EPD_MOSI        23
@@ -56,7 +57,9 @@ void setup() {
     display.init();
     display.setRotation(2);
 
+    display.fillScreen(GxEPD_WHITE);
     display.setTextColor(GxEPD_BLACK);
+    display.setFont(&FreeMonoBold9pt7b);
     display.setCursor(0, 20);
     display.println(quote);
     display.update();
