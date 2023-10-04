@@ -6,8 +6,7 @@
     "moduleResolution": "bundler",
     "outDir": "./dist",
     "moduleDetection": "force",
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": false,
     "composite": true,
     "strict": true,
     "downlevelIteration": true,
@@ -20,6 +19,6 @@
       "bun-types" // add Bun global
     ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "src/**/*.spec.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }

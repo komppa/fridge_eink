@@ -1,7 +1,7 @@
 import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js"
 import { transformOpeningHours } from "./dataTransformers"
 import express from "express"
-const apiKey = Bun.env.GOOGLE_API_KEY
+const apiKey = process.env.GOOGLE_API_KEY
 
 
 const client = new Client({})
